@@ -22,6 +22,7 @@ jobs:
           name: Publish to NPM
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~\.npmrc
               npm publish
             else
               echo "Not on master, not publishing"
