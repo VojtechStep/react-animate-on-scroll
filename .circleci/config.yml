@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:7.9-alpine
+    working_directory: ~/react-animate-on-scroll
+    steps:
+      - shell:
+          name: Install build essentials
+          command: apk add --no-cache --virtual build-dependencies make gcc g++ python git
+      - checkout
+      - shell:
+          name: Install yarn
+          command: npm install yarn
+      - shell:
+          name: Install dependencies
+          command: yarn
+      - shell:
+          name: Build
+          command: yarn gulp build
+      - deploy:
+          name: Publish to NPM
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              npm publish
+            else
+              echo "Not on master, not publishing"
+            fi

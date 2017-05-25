@@ -1,5 +1,5 @@
 {
-  "name": "react-animate-on-scroll",
+  "name": "react-animate-on-scroll-server",
   "version": "1.2.1",
   "description": "React component to animate elements on scroll with animate.css",
   "main": "dist/scrollAnimation.min.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dbramwell/react-animate-on-scroll"
+    "url": "https://github.com/VojtechStep/react-animate-on-scroll"
   },
   "keywords": [
     "reactScrollEffects",
@@ -21,6 +21,9 @@
     "reactAnimateOnScroll"
   ],
   "author": "dbramwell",
+  "contributors": [
+    "Vojtech Stepancik <vojtechstepancik@outlook.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dbramwell/react-animate-on-scroll/issues"

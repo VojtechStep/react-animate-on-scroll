@@ -1,3 +1,4 @@
+.circleci
 demo
 node_modules
 gulpfile.js
