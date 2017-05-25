@@ -23,7 +23,7 @@ export default class ScrollAnimation extends Component {
       lastVisibility: {partially: false, completely: false},
       timeouts: []
     };
-    if (window && window.addEventListener) {
+    if (typeof window && window.addEventListener) {
       window.addEventListener("scroll", throttle(this.handleScroll.bind(this), 200));
     }
     this.getClasses = this.getClasses.bind(this);
