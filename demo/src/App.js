@@ -5,7 +5,7 @@ import Home from './home/Home';
 import PropDescPage from './propDescriptionPage/PropDescPage';
 import ScrollableAnchor from 'react-scrollable-anchor';
 import Overview from './overview/Overview';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from 'react-animate-on-scroll-server';
 import "../node_modules/animate.css/animate.min.css";
 
 class App extends Component {
@@ -39,6 +39,9 @@ class App extends Component {
           })}
           </div>
           </PropDescPage>
+        </ScrollableAnchor>
+        <ScrollableAnchor id={'onlyOnce'}>
+          <PropDescPage property="onlyOnce" animateIn="fadeIn" onlyOnce />
         </ScrollableAnchor>
         <ScrollableAnchor id={'install'}>
           <Overview/>
