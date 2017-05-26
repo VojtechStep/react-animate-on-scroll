@@ -4,12 +4,16 @@ import PropTypes from "prop-types";
 
 export default class ScrollAnimation extends Component {
   static posTop() {
-    if (typeof window.pageYOffset !== "undefined") {
+    if (typeof window !== 'undefined'
+      && typeof window.pageYOffset !== "undefined") {
       return window.pageYOffset;
-    } else if (document.documentElement.scrollTop) {
-      return document.documentElement.scrollTop;
-    } else if (document.body.scrollTop) {
-      return document.body.scrollTop;
+    }
+    if (typeof document !== 'undefined') {
+      if (document.documentElement.scrollTop) {
+        return document.documentElement.scrollTop;
+      } else if (document.body.scrollTop) {
+        return document.body.scrollTop;
+      }
     }
     return 0;
   }
@@ -23,8 +27,9 @@ export default class ScrollAnimation extends Component {
       lastVisibility: {partially: false, completely: false},
       timeouts: []
     };
-    if (typeof window && window.addEventListener) {
-      window.addEventListener("scroll", throttle(this.handleScroll.bind(this), 200));
+    this.handleScroll = throttle(this.handleScroll.bind(this), 200);
+    if (typeof window !== 'undefined' && window.addEventListener) {
+      window.addEventListener("scroll", this.handleScroll);
     }
     this.getClasses = this.getClasses.bind(this);
   }
@@ -36,9 +41,7 @@ export default class ScrollAnimation extends Component {
   }
 
   componentWillUnmount() {
-    if (window && window.addEventListener) {
-      window.removeEventListener("scroll", this.handleScroll.bind(this));
-    }
+    this.unsubscribe();
   }
 
   handleScroll() {
@@ -87,6 +90,11 @@ export default class ScrollAnimation extends Component {
     };
   }
 
+  unsubscribe() {
+    if (typeof window !== 'undefined' && window.removeEventListener)
+      window.removeEventListener("scroll", this.handleScroll);
+  }
+
   getStyle(visible) {
     var style = {"animationDuration": this.props.duration + "s"};
     if (!visible.partially && !this.props.initiallyVisible) {
@@ -110,6 +118,7 @@ export default class ScrollAnimation extends Component {
   }
 
   render() {
+    this.state.classes.includes(this.props.animateIn) && this.props.onlyOnce && this.unsubscribe();
     return (
       <div ref={(node) => { this.node = node; }} className={this.state.classes} style={this.state.style}>
         {this.props.children}
@@ -122,7 +131,8 @@ ScrollAnimation.defaultProps = {
   offset: 100,
   duration: 1,
   initiallyVisible: false,
-  delay: 0
+  delay: 0,
+  onlyOnce: false
 };
 
 ScrollAnimation.propTypes = {
@@ -131,5 +141,6 @@ ScrollAnimation.propTypes = {
   offset: PropTypes.number,
   duration: PropTypes.number,
   delay: PropTypes.number,
-  initiallyVisible: PropTypes.bool
+  initiallyVisible: PropTypes.bool,
+  onlyOnce: PropTypes.bool
 };
