@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from 'react-animate-on-scroll-server';
 import jsxToString from 'jsx-to-string';
 var Prism = require('prismjs');
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 var Prism = require('prismjs');
 import jsxToString from 'jsx-to-string';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from 'react-animate-on-scroll-server';
 
 class PropDescPage extends Component {
 
@@ -11,7 +11,7 @@ class PropDescPage extends Component {
   }
 
   getScrollAnimation() {
-    return (<ScrollAnimation delay={this.props.delay} duration={this.props.duration} animateIn={this.props.animateIn} animateOut={this.props.animateOut} initiallyVisible={this.props.initiallyVisible}>
+    return (<ScrollAnimation onlyOnce={this.props.onlyOnce} delay={this.props.delay} duration={this.props.duration} animateIn={this.props.animateIn} animateOut={this.props.animateOut} initiallyVisible={this.props.initiallyVisible}>
         <h1>{this.props.property}</h1>
       </ScrollAnimation>)
   }
